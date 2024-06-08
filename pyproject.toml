@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "aws-course"
-version = "0.1.0"
+version = "0.2.0"
 homepage = "https://github.com/luiscberrocal/aws-course"
 description = "2024 AWS Course."
 authors = ["Luis C. Berrocal <luis.berrocal.1942@gmail.com>"]
