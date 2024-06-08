@@ -45,14 +45,14 @@ def list_buckets(user_prefix='DUMMY_USER') -> List[Dict[str, Any]]:
     return response['Buckets']
 
 
-def update_docker_file_versions(client: 'boto3.client', bucket_name: str):
+def update_docker_file_versions(client: 'boto3.client', bucket_name: str) -> None:
     docker_html = COURSE_FOLDER / "s3" / "docker.html"
 
     client.upload_file(str(docker_html), bucket_name, "index.html", ExtraArgs={'ContentType': 'text/html'})
 
 
 if __name__ == '__main__':
-    print(list_buckets())
+    # print(list_buckets())
     client = get_boto3_client_from_environment('s3', 'DUMMY_USER')
     bucket = "aws-lucho-course-v002"
 
