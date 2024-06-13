@@ -28,7 +28,10 @@ def get_boto3_client(service_name: str, region_name: str, access_key: str, secre
 def get_boto3_client_from_environment(service_name: str, user_prefix: str):
     access_key_name = f'{user_prefix}_AWS_ACCESS_KEY'
     secret_key_name = f'{user_prefix}_AWS_SECRET_ACCESS_KEY'
+    region = f'{user_prefix}_AWS_REGION_NAME'
+    if not os.getenv(region):
+        region = 'us-east-2'
     load_environment_variables("AWS_environment.txt")
     key = os.getenv(access_key_name)
     secret = os.getenv(secret_key_name)
-    return get_boto3_client(service_name, 'us-east-2', access_key=key, secret_key=secret)
+    return get_boto3_client(service_name, region_name=region, access_key=key, secret_key=secret)
