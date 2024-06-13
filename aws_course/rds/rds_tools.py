@@ -1,21 +1,19 @@
 from aws_course.core import get_boto3_client_from_environment
+from aws_course.rds.schemas import DBInstanceList
 
 
-def main():
-    client = get_boto3_client_from_environment('rds', 'DUMMY_USER')
+def get_instances(user_prefix: str) -> DBInstanceList:
+    client = get_boto3_client_from_environment('rds', user_prefix=user_prefix)
     response = client.describe_db_instances()
-    print(response)
-    # FIXME Delete ------------------------------
-    var_name = 'response'
-    var_value = eval(var_name)
-    from pathlib import Path
-    import json
-    file = Path(__name__).parent / f'__{var_name}.json'
-    with open(file, 'w') as f:
-        json.dump(var_value, f, indent=4, default=str)
-    print(f'>>>> Saved file {file}')
-    # ---------------------------------------
+    instance_list = DBInstanceList(**response)
+    return instance_list
 
 
 if __name__ == '__main__':
-    main()
+    instances = get_instances('DUMMY_USER')
+    for instance in instances.db_instances:
+        print(instance.db_instance_identifier)
+        print(instance.engine, instance.engine_version)
+        print(instance.db_instance_class)
+        print(instance.allocated_storage, "GB")
+

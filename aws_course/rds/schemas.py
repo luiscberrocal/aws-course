@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
@@ -49,7 +50,7 @@ class OptionGroupMembership(BaseModel):
 
 class CertificateDetails(BaseModel):
     ca_identifier: str = Field(..., alias='CAIdentifier')
-    valid_till: str = Field(..., alias='ValidTill')
+    valid_till: datetime = Field(..., alias='ValidTill')
 
 
 class DbInstance(BaseModel):
@@ -60,7 +61,7 @@ class DbInstance(BaseModel):
     master_username: str = Field(..., alias='MasterUsername')
     endpoint: Endpoint = Field(..., alias='Endpoint')
     allocated_storage: int = Field(..., alias='AllocatedStorage')
-    instance_create_time: str = Field(..., alias='InstanceCreateTime')
+    instance_create_time: datetime = Field(..., alias='InstanceCreateTime')
     preferred_backup_window: str = Field(..., alias='PreferredBackupWindow')
     backup_retention_period: int = Field(..., alias='BackupRetentionPeriod')
     db_security_groups: List = Field(..., alias='DBSecurityGroups')
@@ -70,7 +71,7 @@ class DbInstance(BaseModel):
     db_subnet_group: DbSubnetGroup = Field(..., alias='DBSubnetGroup')
     preferred_maintenance_window: str = Field(..., alias='PreferredMaintenanceWindow')
     pending_modified_values: Dict[str, Any] = Field(..., alias='PendingModifiedValues')
-    latest_restorable_time: str = Field(..., alias='LatestRestorableTime')
+    latest_restorable_time: datetime = Field(..., alias='LatestRestorableTime')
     multi_az: bool = Field(..., alias='MultiAZ')
     engine_version: str = Field(..., alias='EngineVersion')
     auto_minor_version_upgrade: bool = Field(..., alias='AutoMinorVersionUpgrade')
