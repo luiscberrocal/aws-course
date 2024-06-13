@@ -52,9 +52,12 @@ def update_docker_file_versions(client: 'boto3.client', bucket_name: str) -> Non
 
 
 if __name__ == '__main__':
-    # print(list_buckets())
     client = get_boto3_client_from_environment('s3', 'DUMMY_USER')
     bucket = "aws-lucho-course-v002"
+
+    buckets = list_buckets('DUMMY_USER')
+    for b in buckets:
+        print(b)
 
     # file_to_upload = COURSE_FOLDER / "s3" / "coffee.jpg"
     # print(file_to_upload, file_to_upload.exists())
@@ -62,4 +65,4 @@ if __name__ == '__main__':
     # s3.upload_file(str(file_to_upload), bucket_name, "coffee.jpg")
     # print(f"File {file_to_upload} uploaded")
     # http://aws-lucho-course-v002.s3-website.us-east-2.amazonaws.com
-    update_docker_file_versions(client, bucket)
+    # update_docker_file_versions(client, bucket)
